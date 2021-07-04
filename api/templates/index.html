@@ -15,15 +15,19 @@
   }
 
   td {
-    padding: 4px;
+    padding: 8px;
+  }
+
+  thead {
+    background-color: #000;
   }
 
   thead tr td {
     color: white;
-    font-weight: bold;
   }
 
   a {
+    color: inherit;
     text-decoration: none;
   }
 
@@ -53,12 +57,19 @@
     <table border="0" cellpadding="0" cellspacing="0" width=85%>
       <thead>
         <tr>
-          <td bgcolor="#000">XYZ Digital News</td>
+          <td width="100%">
+            <b>XYZ Digital News</b>
+          </td>
+          <td>
+            <a href="submit">submit</a>
+          </td>
         </tr>
       </thead>
       <tbody>
         {{#articles}}
-          <tr><td><a href="{{URL}}">{{TITLE}} <span class="url">({{DOMAIN}})</span></a></td></tr>
+        <tr>
+          <td><a href="{{URL}}">{{TITLE}} <span class="url">({{DOMAIN}})</span></a></td>
+        </tr>
         {{/articles}}
       </tbody>
     </table>
