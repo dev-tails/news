@@ -36,13 +36,20 @@
   }
 
   .spacer {
-    width: 100%;
+    width: 70%;
   }
 
   a {
     color: inherit;
     text-decoration: none;
   }
+
+  input {
+    box-sizing: border-box;
+    width: 90%;
+    max-width: 400px;
+  }
+
 </style>
 
 <body>
@@ -63,22 +70,20 @@
         <form method="POST" action="/submit">
           <tbody>
             <tr>
-              <td>
+              <td width="20px">
                 title
               </td>
               <td>
-                <input name="title" size="80" />
+                <input name="title" />
               </td>
-              <td class="spacer"></td>
             </tr>
             <tr>
               <td>
                 url
               </td>
               <td>
-                <input name="url" size="80" />
+                <input name="url" />
               </td>
-              <td class="spacer"></td>
             </tr>
             <tr>
               <td></td>
