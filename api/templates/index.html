@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<meta name="description" content="News for curious minds interested in all forms of technology">
+<title>News</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  table {
+    width: 85%;
+    background-color: #424242;
+  }
+
+  td {
+    padding: 4px;
+  }
+
+  thead tr td {
+    color: white;
+    font-weight: bold;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  a:visited {
+    color: #828282;
+  }
+
+  @media only screen and (min-width: 300px) and (max-width: 750px) {
+    table {
+      width: 100%;
+      min-width: 0;
+    }
+
+    body {
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+  .url {
+    font-size: .7em;
+  }
+</style>
+
+<body>
+  <center>
+    <table border="0" cellpadding="0" cellspacing="0" width=85%>
+      <thead>
+        <tr>
+          <td bgcolor="#000">XYZ Digital News</td>
+        </tr>
+      </thead>
+      <tbody>
+        {{#articles}}
+          <tr><td><a href="{{href}}">{{title}}<span class="url">({{url}})</span></a></td></tr>
+        {{/articles}}
+      </tbody>
+    </table>
+  </center>
+</body>
+
+</html>
