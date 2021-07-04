@@ -84,5 +84,51 @@ int main()
      res.end();
    });
 
+  CROW_ROUTE(app, "/submit").methods(crow::HTTPMethod::GET, crow::HTTPMethod::POST)
+  ([](const crow::request & req, crow::response &res)
+   {
+     if (req.method == crow::HTTPMethod::POST) {
+      sqlite3 *db;
+      char *zErrMsg = 0;
+      int rc = 0;
+      rc = sqlite3_open("news.db", &db);
+
+      if (rc)
+      {
+        fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
+        return res.end();
+      }
+      else
+      {
+        fprintf(stderr, "Opened database successfully\n");
+      }
+
+      crow::query_string qs("?" + req.body);
+      std::string title = qs.get("title");
+      std::string url = qs.get("url");
+
+      std::string sql = "INSERT INTO NEWS (TITLE,URL) VALUES ('" + title + "','" + url + "')";
+
+      rc = sqlite3_exec(db, sql.c_str(), callback, 0, &zErrMsg);
+      if (rc != SQLITE_OK)
+      {
+        fprintf(stderr, "SQL error: %s\n", zErrMsg);
+        sqlite3_free(zErrMsg);
+      }
+      else
+      {
+        fprintf(stdout, "Records created successfully\n");
+      }
+
+      sqlite3_close(db);
+      res.redirect("/");
+      return res.end();
+    }
+
+    auto page = crow::mustache::load("submit.html");
+    res.write(page.render());
+    res.end();
+   });
+
   app.port(18080).multithreaded().run();
 }
