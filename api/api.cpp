@@ -10,7 +10,7 @@ static int callback(void *data, int argc, char **argv, char **azColName)
 
   for (int i = 0; i < argc; i++)
   {
-    if (strcmp(azColName[i], "URL") == 0)
+    if (strcmp(azColName[i], "url") == 0)
     {
       std::string url = argv[i];
       std::smatch base_match;
@@ -22,12 +22,12 @@ static int callback(void *data, int argc, char **argv, char **azColName)
         {
           std::ssub_match base_sub_match = base_match[1];
           std::string domain = base_sub_match.str();
-          article["DOMAIN"] = domain;
+          article["domain"] = domain;
         }
       }
       else
       {
-        article["DOMAIN"] = argv[i];
+        article["domain"] = argv[i];
       }
     }
 
@@ -60,7 +60,7 @@ int main()
 
      std::vector<crow::json::wvalue> articles;
 
-     const char *sql = "SELECT * from NEWS ORDER BY ID DESC LIMIT 30";
+     const char *sql = "SELECT * from news ORDER BY id DESC LIMIT 30";
 
      char *zErrMsg = 0;
      int selectRc = sqlite3_exec(db, sql, callback, (void *)&articles, &zErrMsg);
@@ -107,7 +107,7 @@ int main()
       std::string title = qs.get("title");
       std::string url = qs.get("url");
 
-      std::string sql = "INSERT INTO NEWS (TITLE,URL) VALUES ('" + title + "','" + url + "')";
+      std::string sql = "INSERT INTO news (title,url) VALUES ('" + title + "','" + url + "')";
 
       rc = sqlite3_exec(db, sql.c_str(), callback, 0, &zErrMsg);
       if (rc != SQLITE_OK)
